@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const jsonwebtoken = require('jsonwebtoken')
 const User = require('../models/user')
+const errorHandler = require('../utils/errorHandler')
 const config = require('../config/config')
 
 module.exports.login = async function (req, res) {
@@ -51,10 +52,7 @@ module.exports.register = async function (req, res) {
             })
         }).catch((e) => {
             console.log(e)
-            res.status(500).json({
-                message: 'Failed to persist'
-            })
-
+            errorHandler(res, e)
         })
     }
 }
