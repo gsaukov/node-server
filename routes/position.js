@@ -3,9 +3,9 @@ const controller = require('../controllers/position')
 const router = express.Router()
 
 
-router.get('/:categoryId', controller.getBycategoryId)
-router.post('/', controller.create)
-router.patch('/:id', controller.update)
-router.delete('/:id', controller.remove)
+router.get('/:categoryId', passport.authenticate('jwt', {session: false}), controller.getBycategoryId)
+router.post('/', passport.authenticate('jwt', {session: false}), controller.create)
+router.patch('/:id', passport.authenticate('jwt', {session: false}), controller.update)
+router.delete('/:id', passport.authenticate('jwt', {session: false}), controller.remove)
 
 module.exports = router
