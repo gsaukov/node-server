@@ -6,6 +6,8 @@ npm install cors
 npm install morgan
 npm i mongoose
 npm i bcryptjs
+npm i jsonwebtoken
+npm i passport passport-jwt --http://www.passportjs.org/packages
 
 ---MONGO DB
 -create new db

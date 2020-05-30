@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const passport = require('passport')
 const config = require('./config/config')
 
 const analyticsRoutes = require('./routes/analytics')
@@ -22,6 +23,8 @@ app.use(morgan('dev')) // logging
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+app.use(passport.initialize())
+require('./middleware/passport')(passport)
 
 app.use('/api/analityc', analyticsRoutes)
 app.use('/api/auth', authRoutes)

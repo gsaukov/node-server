@@ -1,6 +1,6 @@
 module.exports.getAll = function (req, res) {
     res.status(200).json({
-        overview: true})
+        categories: 'category'})
 }
 
 module.exports.getById = function (req, res) {
