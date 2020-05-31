@@ -5,8 +5,8 @@ const storage = multer.diskStorage({
     destination(req, file, cb){
         cb(null, 'uploads/')
     },
-    file(req, file, cb){
-        const date = moment.format('DDMMYYYY-HHmmss_SSS')
+    filename(req, file, cb){
+        const date = moment().format('DDMMYYYY-HHmmss_SSS')
         cb(null, `${date}-${file.originalname}`)
     }
 })
@@ -16,7 +16,7 @@ const limits = {
 }
 
 const fileFilter = (req, file, cb) => {
-    if (file.mimeType === 'image/png' || file.mimeType === 'image/jpeg'){
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg'){
         cb(null, true)
     } else {
         cb(null, false)

@@ -34,8 +34,8 @@ module.exports.create = async function (req, res) {
     try{
         const category = await new Category({
             name: req.body.name,
-            imageSrc: req.body.imageSrc,
-            user: req.user.id //comes from passport
+            user: req.user.id, //comes from passport
+            imageSrc: req.file ? req.file.path : '' //comes from multer
         }).save()
         res.status(200).json(category)
     }catch (e) {
@@ -45,9 +45,15 @@ module.exports.create = async function (req, res) {
 
 module.exports.update = async function (req, res) {
     try{
+        const updated = {
+            name: req.body.name
+        }
+        if(req.file) {
+            updated.imageSrc = req.file.path
+        }
         const category = await Category.findOneAndUpdate(
             {_id: req.params.id},
-            {$set: req.body},
+            {$set: updated},
             {new: true}
         )
         res.status(200).json(category)

@@ -20,6 +20,7 @@ mongoose.connect(config.mongoUri)
 
 app.use(cors())
 app.use(morgan('dev')) // logging
+app.use('/uploads', express.static('uploads')) // mark as static resources to allow file access
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
