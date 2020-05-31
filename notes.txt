@@ -7,7 +7,11 @@ npm install morgan
 npm i mongoose
 npm i bcryptjs
 npm i jsonwebtoken
-npm i passport passport-jwt --http://www.passportjs.org/packages
+npm i passport passport-jwt //http://www.passportjs.org/packages
+npm i multer //file upload
+npm i moment //date format
+
+
 
 ---MONGO DB
 -create new db
