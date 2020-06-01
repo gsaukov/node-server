@@ -1,3 +1,5 @@
+---SERVER
+
 npm init
 npm install express
 npm i nodemon
@@ -12,9 +14,12 @@ npm i multer //file upload
 npm i moment //date format
 
 npm install @angular/cli
-ng new client
 npm install -D concurrently //to tun to scripts concurrently from command line.
 
+
+---CLIENT
+ng new client
+npm install materialize-css@next
 
 
 
