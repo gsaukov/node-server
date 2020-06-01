@@ -13,6 +13,8 @@ npm i moment //date format
 
 npm install @angular/cli
 ng new client
+npm install -D concurrently //to tun to scripts concurrently from command line.
+
 
 
 
