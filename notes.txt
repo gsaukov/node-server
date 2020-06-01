@@ -11,6 +11,9 @@ npm i passport passport-jwt //http://www.passportjs.org/packages
 npm i multer //file upload
 npm i moment //date format
 
+npm install @angular/cli
+ng new client
+
 
 
 ---MONGO DB
