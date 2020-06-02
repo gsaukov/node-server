@@ -20,7 +20,7 @@ npm install -D concurrently //to tun to scripts concurrently from command line.
 ---CLIENT
 ng new client
 npm install materialize-css@next
-
+ng generate component login-page
 
 
 ---MONGO DB
