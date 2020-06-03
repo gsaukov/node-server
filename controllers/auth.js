@@ -24,7 +24,7 @@ module.exports.login = async function (req, res) {
         }
     } else {
         console.log('User ' + req.body.email + ' not found')
-        res.status(404).json({
+        res.status(401).json({
             message: 'User not found'
         })
     }
