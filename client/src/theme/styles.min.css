@@ -7,8 +7,8 @@ body {
   width: 250px !important;
 }
 .a-sidenav h4 {
+  color: white;
   padding: 0 30px;
-  opacity: 0.8;
   font-size: 2rem;
 }
 .a-sidenav .bold.last {
@@ -183,4 +183,8 @@ footer {
 .input-field input:focus {
   border-bottom: 1px solid #673ab7 !important;
   box-shadow: 0 1px 0 0 #673ab7 !important;
+}
+.sidenav li>a {
+  color: white;
+  font-size: 20px;
 }
