@@ -26,3 +26,6 @@ ng generate component login-page
 ---MONGO DB
 -create new db
 use orderdb
+
+
+learn rxjs, observable, pipes.
