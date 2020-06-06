@@ -18,7 +18,8 @@ body {
 }
 main,
 footer {
-  margin-left: 250px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .content {
   padding: 0 30px;
@@ -206,3 +207,11 @@ footer {
   background-color: #ff9800;
 }
 
+.collection-item {
+  color: #673ab7 !important;
+}
+
+.collection-item.active {
+  background-color: #ff9800 !important;
+  color: white !important;
+}
