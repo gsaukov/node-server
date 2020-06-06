@@ -1,17 +1,17 @@
 body {
-  background-color: #b39ddb;
+  background-color: #e3f2fd;
 }
 
-.a-sidenav {
-  transform: translateX(0) !important;
+.sidenav {
+  /*transform: translateX(0) !important;*/
   width: 250px !important;
 }
-.a-sidenav h4 {
+.sidenav h4 {
   color: white;
   padding: 0 30px;
   font-size: 2rem;
 }
-.a-sidenav .bold.last {
+.sidenav .bold.last {
   position: absolute;
   bottom: 62px;
   width: 100%;
@@ -184,7 +184,25 @@ footer {
   border-bottom: 1px solid #673ab7 !important;
   box-shadow: 0 1px 0 0 #673ab7 !important;
 }
+
 .sidenav li>a {
   color: white;
   font-size: 20px;
 }
+
+.sidenav li:hover {
+  background-color: darkblue;
+}
+
+.sidenav  li.active {
+  background-color: #ff9800;
+}
+
+.nav-wrapper li:hover {
+  background-color: darkblue;
+}
+
+.nav-wrapper li.active {
+  background-color: #ff9800;
+}
+
