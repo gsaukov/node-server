@@ -1,0 +1,47 @@
+<main class="content">
+  <div class="page-title">
+    <h4>
+      <a href="#" routerLink="/categories">Category</a>
+      <i class="material-icons">keyboard_arrow_right</i>
+      {{isNew ? 'Add' : 'Edit'}} category
+    </h4>
+    <span>
+      <button class="waves-effect deep-purple darken-3 waves-orange btn btn-small">
+        <i class="material-icons">delete</i>
+      </button>
+    </span>
+  </div>
+
+  <div class="row">
+    <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit($event)">
+      <div class="input-field">
+        <input id="name" type="text" formControlName="name" [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"/>
+        <label for="name">Name</label>
+        <span *ngIf="form.get('name').invalid && form.get('name').touched">
+          <span class="helper-text red-text" *ngIf="form.get('name').errors['required']">Name cannot be empty</span>
+        </span>
+      </div>
+
+      <div>
+        <button type="button" class="waves-effect deep-purple darken-3 waves-orange btn lighten-2 mb2">
+          <i class="material-icons left">backup</i>
+          Load image
+        </button>
+      </div>
+
+      <div>
+        <button type="submit" [disabled]="form.invalid || form.disabled" class="waves-effect deep-purple darken-3 waves-orange btn">
+          Save changes
+        </button>
+      </div>
+    </form>
+
+    <div class="col s12 l4 center">
+      <img class="responsive-img" style="height: 200px" src="cake.jpg">
+    </div>
+  </div>
+
+</main>
+
+<app-positions-form></app-positions-form>
+

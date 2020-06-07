@@ -3,12 +3,21 @@
   <button class="modal-action btn waves-effect deep-purple darken-3 waves-orange" routerLink="/categories/new">Add category</button>
 </div>
 
-<div class="row" *ngIf="!loading">
+<div class="row" *ngIf="categories$ | async as categories; else loader">
   <div class="col s12">
-    <div class="collection">
-      <a href="#!" class="collection-item" *ngFor="let category of categories">{{category.name}}</a>
+    <div class="collection" *ngIf="categories.length > 0; else empty">
+      <a href="#!" class="collection-item" *ngFor="let category of categories" [routerLink]="['/categories', category._id]">
+        {{category.name}}
+      </a>
     </div>
+    <ng-template #empty>
+      <div class="center">
+        No categories found.
+      </div>
+    </ng-template>
   </div>
 </div>
 
-<app-loader *ngIf="loading"></app-loader>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
