@@ -23,7 +23,8 @@
       </div>
 
       <div>
-        <button type="button" class="waves-effect deep-purple darken-3 waves-orange btn lighten-2 mb2">
+        <input type="file" class="invisible-control" (change)="onFileUpload($event)" #fileInput>
+        <button type="button" class="waves-effect deep-purple darken-3 waves-orange btn lighten-2 mb2" (click)="onFileInputClick($event)" [disabled]="form.disabled">
           <i class="material-icons left">backup</i>
           Load image
         </button>
@@ -37,7 +38,7 @@
     </form>
 
     <div class="col s12 l4 center">
-      <img class="responsive-img" style="height: 200px" src="cake.jpg">
+      <img class="responsive-img" class="h200" [src]="imagePreview" *ngIf="imagePreview">
     </div>
   </div>
 
