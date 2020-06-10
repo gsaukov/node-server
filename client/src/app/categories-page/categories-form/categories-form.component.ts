@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CategoriesService} from "../../shared/services/categories.service";
 import {switchMap} from "rxjs/operators";
@@ -24,7 +24,8 @@ export class CategoriesFormComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
-              private categoriesService: CategoriesService) { }
+              private categoriesService: CategoriesService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -106,5 +107,15 @@ export class CategoriesFormComponent implements OnInit {
     )
   }
 
+  deleteCategory($event: MouseEvent) {
+    const descision = confirm('Are you sure you want to delete category ' + this.category.name)
 
+    if(descision){
+      this.categoriesService.delete(this.category._id).subscribe(
+        (resp) => {MaterialService.toast(resp.message)},
+        (error) => {MaterialService.toast(error.message)},
+        () => {this.router.navigate(['/categpries'])}
+      )
+    }
+  }
 }
