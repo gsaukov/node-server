@@ -114,7 +114,7 @@ export class CategoriesFormComponent implements OnInit {
       this.categoriesService.delete(this.category._id).subscribe(
         (resp) => {MaterialService.toast(resp.message)},
         (error) => {MaterialService.toast(error.message)},
-        () => {this.router.navigate(['/categpries'])}
+        () => {this.router.navigate(['/categories'])}
       )
     }
   }

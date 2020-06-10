@@ -2,6 +2,12 @@ import {ElementRef} from "@angular/core";
 
 declare var M //Materializejs M will be in browser window.
 
+export interface MaterialInstance {
+  open?(): void
+  close?(): void
+  destroy?(): void
+}
+
 export class MaterialService {
   static toast(message: string) {
     M.toast({html: message})
@@ -17,5 +23,9 @@ export class MaterialService {
 
   static updateTextInputs() {
     M.updateTextFields()
+  }
+
+  static initModal(ref: ElementRef): MaterialInstance {
+    return M.Modal.init(ref.nativeElement)
   }
 }

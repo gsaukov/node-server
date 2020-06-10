@@ -6,7 +6,7 @@
       {{isNew ? 'Add' : 'Edit'}} category
     </h4>
     <span>
-      <button class="waves-effect deep-purple darken-3 waves-orange btn btn-small" (click)="deleteCategory($event)" )>
+      <button class="waves-effect deep-purple darken-3 waves-orange btn btn-small" *ngIf="!isNew" (click)="deleteCategory($event)">
         <i class="material-icons">delete</i>
       </button>
     </span>
@@ -44,5 +44,5 @@
 
 </main>
 
-<app-positions-form></app-positions-form>
+<app-positions-form *ngIf="category?._id" [categryId]="category._id"></app-positions-form>
 
