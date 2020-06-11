@@ -13,7 +13,7 @@
                 {{position.name}} <strong>{{position.cost}}</strong>
             </span>
           <span>
-            <i class="material-icons">delete</i>
+            <i class="material-icons" (click)="onDeletePosition($event, position)">delete</i>
           </span>
         </a>
       </div>
@@ -27,20 +27,28 @@
   </div>
 </div>
 
-<div id="create-modal" class="modal" #modal>
-  <div class="modal-content">
-    <h4 class="mb1">Add position</h4>
-    <div class="input-field">
-      <input id="pos-name" type="text" required>
-      <label for="pos-name">Name</label>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="modal" #modal>
+    <div class="modal-content">
+      <h4 class="mb1">Add position</h4>
+      <div class="input-field">
+        <input id="pos-name" type="text" formControlName="name" [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"/>
+        <label for="pos-name">Name</label>
+        <span *ngIf="form.get('name').invalid && form.get('name').touched">
+          <span class="helper-text red-text" *ngIf="form.get('name').errors['required']">Name cannot be empty</span>
+        </span>
+      </div>
+      <div class="input-field">
+        <input id="pos-cost" type="text" formControlName="cost" min="1" [ngClass]="{'invalid': form.get('cost').invalid && form.get('cost').touched}"/>
+        <label for="pos-cost">Price</label>
+        <span *ngIf="form.get('cost').invalid && form.get('cost').touched">
+          <span class="helper-text red-text" *ngIf="form.get('cost').errors['required'] || form.get('cost').errors['pattern']">Price must be positive number</span>
+        </span>
+      </div>
     </div>
-    <div class="input-field">
-      <input id="pos-cost" type="text" required>
-      <label for="pos-cost">Price</label>
+    <div class="modal-footer">
+      <button type="button" (click)="onCancel()" class="modal-action waves-effect waves-black btn-flat" [disabled]="form.disabled">Cancel</button>
+      <button type="submit" class="modal-action btn waves-effect" [disabled]="form.disabled||form.invalid">Save</button>
     </div>
   </div>
-  <div class="modal-footer">
-    <button (click)="onCancel()" class="modal-action waves-effect waves-black btn-flat">Cancel</button>
-    <button (click)="onSave()" class="modal-action btn waves-effect">Save</button>
-  </div>
-</div>
+</form>
