@@ -2,7 +2,7 @@
 
 <div>
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-  <ul id="slide-out" class="sidenav deep-purple darken-4" #sideMenu>
+  <ul id="slide-out" class="sidenav sidenav-close deep-purple darken-4" #sideMenu>
     <h4>OrderDb</h4>
     <li class="bold" routerLinkActive="active" *ngFor="let link of links">
       <a [routerLink]="[link.url]" class="waves-effect waves-orange">{{link.name}}</a>
