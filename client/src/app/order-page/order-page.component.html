@@ -1,8 +1,13 @@
 <main class="content">
   <div class="page-title">
-    <h4>Orders</h4>
-    <button class="waves-effect btn deep-purple darken-4 modal-trigger" data-target="explore-order">
-      Cancel
+    <h4 *ngIf="isRoot">Orders</h4>
+    <h4 *ngIf="!isRoot">
+      <a href="#">Order</a>
+      <i class="material-icons">keyboard_arrow_right</i>
+      Add order
+    </h4>
+    <button class="waves-effect waves-orange btn deep-purple darken-4 modal-trigger" (click)="open()" >
+      Submit
     </button>
   </div>
 
@@ -10,7 +15,7 @@
 
 </main>
 
-<div id="explore-order" class="modal modal-fixed-footer">
+<div #modal class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4 class="mb1">Your order</h4>
     <table class="highlight">
@@ -50,7 +55,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-action waves-effect waves-black btn-flat">Cancel</a>
-    <button class="modal-action btn waves-effect">Submit</button>
+    <button class="modal-action waves-effect waves-black btn-flat" (click)="cancel()">Cancel</button>
+    <button class="waves-effect waves-orange btn deep-purple darken-4" (click)="submit()">Submit</button>
   </div>
 </div>

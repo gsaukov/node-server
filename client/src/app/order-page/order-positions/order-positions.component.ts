@@ -11,4 +11,11 @@ export class OrderPositionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  cancel() {
+
+  }
+
+  submit() {
+
+  }
 }
