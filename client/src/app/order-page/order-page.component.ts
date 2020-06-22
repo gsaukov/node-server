@@ -39,7 +39,7 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   cancel() {
-
+    this.modal.close()
   }
 
   submit() {

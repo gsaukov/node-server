@@ -1,6 +1,6 @@
-<main class="content">
-
-  <table class="highlight">
+<div class="content">
+  <div *ngIf="positions$ | async as positions; else loader">
+    <table class="highlight" *ngIf="positions.length !==0; else empty">
     <thead>
     <tr>
       <th>Item</th>
@@ -11,51 +11,29 @@
     </thead>
 
     <tbody>
-    <tr>
-      <td>Coffee</td>
-      <td>200 руб.</td>
-      <td>
-        <div class="input-field inline order-position-input">
-          <input type="number" value="1" min="1">
-        </div>
-      </td>
-      <td>
-        <button class="btn waves-effect wavers-light btn-small">Добавить</button>
-      </td>
-    </tr>
+      <tr *ngFor="let position of positions">
+        <td>{{position.name}}</td>
+        <td>{{position.cost}} $</td>
+        <td>
+          <div class="input-field inline order-position-input">
+            <input type="number" min="1" [(ngModel)]="position.quantity">
+          </div>
+        </td>
+        <td>
+          <button class="btn waves-effect deep-purple darken-3 waves-orange btn-small" (click)="addToOrder(position)" [disabled]="!(position.quantity>0)">Add order</button>
+        </td>
+      </tr>
     </tbody>
-  </table>
 
-</main>
-
-<div id="explore-order" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4 class="mb1">Your order</h4>
-    <table class="highlight">
-      <thead>
-      <tr>
-        <th>Item</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr>
-        <td>Alvin</td>
-        <td>$0.87</td>
-        <td>3</td>
-        <td><i class="material-icons pointer">delete</i></td>
-      </tr>
-      </tbody>
     </table>
-    <div class="order-summary">
-      <p>Total amount <strong>22 231 руб.</strong></p>
-    </div>
   </div>
-  <div class="modal-footer">
-    <button class="modal-action waves-effect btn-flat" (click)="cancel()">Cancel</button>
-    <button class="modal-action btn waves-effect" (click)="submit()">Submit</button>
-  </div>
+  <ng-template #loader>
+    <app-loader> </app-loader>
+  </ng-template>
+
+  <ng-template #empty>
+    <div class="center"> No positions found. </div>
+  </ng-template>>
 </div>
+
+
