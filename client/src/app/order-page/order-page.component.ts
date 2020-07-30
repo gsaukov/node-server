@@ -4,6 +4,7 @@ import {MaterialInstance, MaterialService} from "../shared/classes/material.serv
 import {OrderService} from "./order.service";
 import {Order, OrderPosition} from "../shared/services/interfaces";
 import {OrdersService} from "../shared/services/order.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-order-page',
@@ -18,7 +19,9 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('modal') modalRef: ElementRef
   modal: MaterialInstance
+  oSub: Subscription
   isRoot: boolean
+  pending = false
 
   ngOnInit(): void {
     this.isRoot = this.router.url === '/order'
@@ -35,6 +38,9 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.modal.destroy()
+    if(this.oSub){
+      this.oSub.unsubscribe()
+    }
   }
 
   open() {
@@ -46,7 +52,7 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   submit() {
-    this.modal.close()
+    this.pending = true
 
     const order: Order = {
       list: this.order.list.map(item => {
@@ -55,11 +61,21 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
       })
     }
 
-    this.ordersService.create(order).subscribe(
+    this.oSub = this.ordersService.create(order).subscribe(
       newOrder => {
         MaterialService.toast(`Order #${newOrder.order} was added`)
+
+      },
+      error => {
+        MaterialService.toast(error.error.message)
+      },
+      () => {
+        this.order.clear()
+        this.pending = false
+        this.modal.close()
       }
     )
+
   }
 
   removePosition(item: OrderPosition) {

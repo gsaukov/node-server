@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {OrderPosition, Position} from "../shared/services/interfaces";
+import {dedupePaths} from "@angular/compiler-cli/ngcc/src/entry_point_finder/utils";
 
 @Injectable()
 export class OrderService {
@@ -33,7 +34,10 @@ export class OrderService {
     this.computePrice()
   }
 
-  clear() {}
+  clear() {
+    this.list = []
+    this.price = 0;
+  }
 
   private computePrice() {
     this.price = this.list.reduce((total, item) => {
