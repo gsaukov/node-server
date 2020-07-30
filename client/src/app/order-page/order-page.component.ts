@@ -2,7 +2,8 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from
 import {NavigationEnd, Router} from "@angular/router";
 import {MaterialInstance, MaterialService} from "../shared/classes/material.service";
 import {OrderService} from "./order.service";
-import {OrderPosition} from "../shared/services/interfaces";
+import {Order, OrderPosition} from "../shared/services/interfaces";
+import {OrdersService} from "../shared/services/order.service";
 
 @Component({
   selector: 'app-order-page',
@@ -12,7 +13,8 @@ import {OrderPosition} from "../shared/services/interfaces";
 export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private router: Router,
-              public order: OrderService) { }
+              public order: OrderService,
+              private ordersService: OrdersService) { }
 
   @ViewChild('modal') modalRef: ElementRef
   modal: MaterialInstance
@@ -44,7 +46,20 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   submit() {
+    this.modal.close()
 
+    const order: Order = {
+      list: this.order.list.map(item => {
+        delete item._id
+        return item
+      })
+    }
+
+    this.ordersService.create(order).subscribe(
+      newOrder => {
+        MaterialService.toast(`Order #${newOrder.order} was added`)
+      }
+    )
   }
 
   removePosition(item: OrderPosition) {
