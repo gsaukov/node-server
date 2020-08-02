@@ -1,12 +1,15 @@
 <main class="content">
   <div class="page-title">
     <h4>Order history</h4>
-    <button class="btn btn-small" data-tooltip="Open filter">
+    <button class="btn btn-small" data-tooltip="Open filter" data-position="left"
+            (click)="isFilterVisible = !isFilterVisible"
+            [ngClass]="{'active': isFilterVisible}"
+            #tooltip>
       <i class="material-icons">filter_list</i>
     </button>
   </div>
 
-  <app-history-filter></app-history-filter>
+  <app-history-filter *ngIf="isFilterVisible"></app-history-filter>
 
   <app-history-list></app-history-list>
 
