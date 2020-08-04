@@ -3,6 +3,7 @@ import {ElementRef} from "@angular/core";
 declare var M //Materializejs M will be in browser window.
 
 export interface MaterialInstance {
+  isOpen: boolean
   open?(): void
   close?(): void
   destroy?(): void
@@ -13,8 +14,8 @@ export class MaterialService {
     M.toast({html: message})
   }
 
-  static initSideMenu(ref: ElementRef) {
-    M.Sidenav.init(ref.nativeElement, {draggable: true});
+  static initSideMenu(ref: ElementRef): MaterialInstance  {
+    return M.Sidenav.init(ref.nativeElement, {draggable: true});
   }
 
   static initFloatingActionButton(ref: ElementRef) {
