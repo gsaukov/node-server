@@ -2,6 +2,14 @@ body {
   background-color: #e3f2fd;
 }
 
+input {
+  font-size: 1.5rem!important;
+}
+
+table {
+  font-size: 1.5rem!important;
+}
+
 .sidenav {
   /*transform: translateX(0) !important;*/
   width: 250px !important;
@@ -89,7 +97,7 @@ footer {
 .order-summary {
   display: flex;
   justify-content: flex-end;
-  font-size: 20px;
+  font-size: 1rem;
   padding-right: 30px;
 }
 .order-summary p {
@@ -165,7 +173,7 @@ footer {
 }
 .average-price {
   padding: 15px 0;
-  font-size: 20px;
+  font-size: 1rem;
 }
 .analytics-block {
   width: 100%;
@@ -187,7 +195,7 @@ footer {
 
 .sidenav li>a {
   color: white;
-  font-size: 20px;
+  font-size: 1.5rem;
 }
 
 .sidenav li:hover {
@@ -208,6 +216,7 @@ footer {
 
 .collection-item {
   color: #673ab7 !important;
+  font-size: 1.5rem;
 }
 
 .collection-item.active {
