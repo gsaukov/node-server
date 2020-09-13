@@ -15,13 +15,17 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   tooltip: MaterialInstance
   oSub: Subscription
   isFilterVisible = false;
-  orders: Order[]
+  orders: Order[] = []
   offset = 0
   limit = STEP
+  noMoreOrders: boolean = false
+  loading: boolean
+  reloading: boolean = false
 
   constructor(private orderService: OrdersService) { }
 
   ngOnInit(): void {
+    this.reloading = true
     this.fetch()
   }
 
@@ -41,9 +45,17 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.oSub = this.orderService.fetch(params).subscribe(
       orders => {
-        this.orders = orders
+        this.orders = this.orders.concat(orders)
+        this.noMoreOrders = orders.length < STEP
+        this.loading = false
+        this.reloading = false
       }
     )
   }
 
+  loadMore() {
+    this.loading = true;
+    this.offset += STEP
+    this.fetch()
+  }
 }

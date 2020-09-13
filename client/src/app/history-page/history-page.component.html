@@ -11,10 +11,26 @@
 
   <app-history-filter *ngIf="isFilterVisible"></app-history-filter>
 
-  <app-history-list></app-history-list>
-
-  <div class="center mb2">
-    <button class="btn btn-small deep-purple darken-4 waves-effect waves-orange">Load more</button>
+  <div *ngIf="!reloading; else reloadingBlock">
+    <div *ngIf="orders.length > 0; else emptyBlock">
+      <app-history-list [orders]="orders"></app-history-list>
+      <div class="center mb2" *ngIf="!noMoreOrders">
+        <button class="btn btn-small deep-purple darken-4 waves-effect waves-orange"
+                (click)="loadMore()" *ngIf="!loading; else loader">
+          Load more
+        </button>
+        <ng-template #loader>
+          <app-loader></app-loader>
+        </ng-template>
+      </div>
+    </div>
+    <ng-template #emptyBlock>
+      <div class="center">There are no orders</div>
+    </ng-template>
   </div>
+
+  <ng-template #reloadingBlock>
+    <app-loader></app-loader>
+  </ng-template>
 
 </main>
