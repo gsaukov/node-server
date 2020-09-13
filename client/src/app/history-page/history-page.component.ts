@@ -1,5 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MaterialInstance, MaterialService} from "../shared/classes/material.service";
+import {OrdersService} from "../shared/services/order.service";
+import {Subscription} from "rxjs";
+import {Order} from "../shared/services/interfaces";
+
+const STEP = 2
 
 @Component({
   selector: 'app-history-page',
@@ -8,12 +13,16 @@ import {MaterialInstance, MaterialService} from "../shared/classes/material.serv
 export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('tooltip') tooltipRef: ElementRef
   tooltip: MaterialInstance
+  oSub: Subscription
   isFilterVisible = false;
+  orders: Order[]
+  offset = 0
+  limit = STEP
 
-  constructor() { }
+  constructor(private orderService: OrdersService) { }
 
   ngOnInit(): void {
-    MaterialService
+    this.fetch()
   }
 
   ngAfterViewInit(): void {
@@ -22,6 +31,19 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.tooltip.destroy()
+    this.oSub.unsubscribe()
+  }
+
+  private fetch() {
+    const params = {
+      offset: this.offset,
+      limit: this.limit
+    }
+    this.oSub = this.orderService.fetch(params).subscribe(
+      orders => {
+        this.orders = orders
+      }
+    )
   }
 
 }
