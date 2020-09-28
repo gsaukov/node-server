@@ -27,7 +27,7 @@ app.use(bodyParser.json())
 app.use(passport.initialize())
 require('./middleware/passport')(passport)
 
-app.use('/api/analityc', analyticsRoutes)
+app.use('/api/analytics', analyticsRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/order', orderRoutes)
