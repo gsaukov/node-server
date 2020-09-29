@@ -13,9 +13,9 @@ module.exports.overview = async function (req, res) {
         const daysWithOrdersNumber = Object.keys(ordersMap).length
         const ordersPerDay = (totalOrdersNumber/daysWithOrdersNumber).toFixed(0)//rounding
         const ordersPercent = (((yesterdayOrdersNumber / ordersPerDay) - 1) * 100).toFixed(2)
-        const totalGain = calculatePrice(ordersMap)
+        const totalGain = calculateTotalPrice(ordersMap)
         const gainPerDay = totalGain / daysWithOrdersNumber
-        const yesterdayGain = calculatePrice(yesterdayOrders)
+        const yesterdayGain = calculateDatePrice(yesterdayOrders)
         const gainPercent = (((yesterdayGain / gainPerDay) - 1) * 100).toFixed(2)
         const compareGain = (yesterdayGain - gainPerDay).toFixed(2)
         const compareOrdersNumber = (yesterdayOrdersNumber - ordersPerDay).toFixed(2)
@@ -62,8 +62,14 @@ function getOrdersMap(orders = []) {
     return daysOrders;
 }
 
-function calculatePrice(orders = []) {
-    return Array.from(orders).reduce((total, order) => {
+function calculateTotalPrice(dates = []) {
+    return Object.values(dates).reduce((total, date) => {
+        return total += calculateDatePrice(date)
+    }, 0);
+}
+
+function calculateDatePrice(orders = []) {
+    return orders.reduce((total, order) => {
         const orderPrice = order.list.reduce((orderTotal, item) => {
             return orderTotal += item.cost * item.quantity
         }, 0)
