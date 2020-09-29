@@ -1,7 +1,7 @@
 <div class="page-title">
   <h4>
-    Overview yesterday (28.09.2020)
-    <i class="material-icons black-text pointer">info_outline</i>
+    Yesterday's overview ({{yesterday | date: 'dd.MM.yyyy'}})
+    <i class="material-icons black-text pointer" (click)="openInfo()">info_outline</i>
   </h4>
 </div>
 
@@ -51,3 +51,10 @@
 <ng-template #loader>
   <app-loader></app-loader>
 </ng-template>
+
+<div class="tap-target" data-target="menu" #tapTarget>
+  <div class="tap-target-content">
+    <h5>What is this age for?</h5>
+    <p>The "Overview" page will show the sales dynamics for the previous day. Comparison with averages will help you understand how your business is doing.</p>
+  </div>
+</div>
