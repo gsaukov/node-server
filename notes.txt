@@ -29,3 +29,4 @@ use orderdb
 
 
 learn rxjs, observable, pipes.
+dependency fixes.
